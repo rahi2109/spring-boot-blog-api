@@ -1,0 +1,11 @@
+package com.blogapp.payloads;
+
+public class PostDto {
+
+//	Integer id;
+	private String title;
+	private String content;
+//	private String imgUrl;
+	
+	
+}

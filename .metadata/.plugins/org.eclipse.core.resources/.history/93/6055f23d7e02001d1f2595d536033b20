@@ -1,0 +1,5 @@
+package com.blogapp.serviceImpl;
+
+public class PostServiceImpl {
+
+}

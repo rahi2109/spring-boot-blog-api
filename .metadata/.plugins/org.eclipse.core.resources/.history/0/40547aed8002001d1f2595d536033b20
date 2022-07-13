@@ -1,0 +1,94 @@
+package com.blogapp.serviceImpl;
+
+import java.util.Date;
+import java.util.List;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.blogapp.exceptions.ResourceNotFoundException;
+import com.blogapp.models.Category;
+import com.blogapp.models.Post;
+import com.blogapp.models.User;
+import com.blogapp.payloads.PostDto;
+import com.blogapp.repository.CategoryRepository;
+import com.blogapp.repository.PostRepository;
+import com.blogapp.repository.UserRepository;
+import com.blogapp.services.PostService;
+
+@Service
+public class PostServiceImpl implements PostService {
+
+	@Autowired
+	PostRepository postRepo;
+	@Autowired
+	CategoryRepository categoryRepo;
+	@Autowired
+	UserRepository userRepo;
+	@Override
+	public Post create(PostDto postDto, Integer userId,Integer CategoryId) {
+		// TODO Auto-generated method stub
+		User user=this.userRepo.findById(userId).orElseThrow(()->new ResourceNotFoundException("User ", "user Id", userId));
+		Category category=this.categoryRepo.findById(CategoryId).orElseThrow(()->new ResourceNotFoundException("Category", "Category Id", CategoryId));
+		Post post=PostDtoToPost(postDto);
+		post.setImgUrl("default.png");
+		post.setAddedDate(new Date());
+		return null;
+	}
+
+	@Override
+	public Post updatePost(PostDto postDto, Integer postId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void deletePost(Integer postId) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<Post> getAllPost() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public Post getPostById(Integer postId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> getPostByCategory(Integer CategoryId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> getPostByUser(Integer userId) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<Post> searchPost(String searchString) {
+		// TODO Auto-generated method stub
+		return null;
+	}
+	
+	private Post PostDtoToPost(PostDto postDto) {
+		Post post=new Post();
+		post.setTitle(postDto.getTitle());
+		post.setContent(postDto.getContent());
+		return post;
+	}
+
+	private PostDto PostToPostDto(Post post) {
+		PostDto postDto=new PostDto();
+		postDto.setTitle(post.getTitle());
+		postDto.setContent(post.getContent());
+		return postDto;
+	}
+}
